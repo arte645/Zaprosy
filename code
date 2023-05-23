@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zaprosy
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            /*Есть массив интов, необходимо определить сумму положительных, произведение ненулевых, кол-во чётных. 
+             * Необходимо изменить массив, удалив нечётные элементы и опять выполнить запросы
+            */
+            int[] massive = {1,-1,3232,2,0,-83,14,-2 };
+            int sum = 0;
+            int mult = 1;
+            var searchPositive=from num in massive
+                       where num > 0
+                       select num;
+            var search4Mult=from num in massive
+                            where num != 0
+                            select num;
+            var searchChetn =from num in massive
+                             where Math.Abs(num) % 2 == 0
+                             select num;
+            foreach (int num in searchPositive)
+                sum += num;
+            foreach (int num in search4Mult)
+                mult *= num;
+            Console.WriteLine(sum);
+            Console.WriteLine(mult);
+            Console.WriteLine(searchChetn.Count());
+
+            sum = 0;
+            mult = 1;
+
+            massive=(from num in massive
+                     where num%2 == 0
+                     select num).ToArray();
+
+            var searchPositive1 = from num in massive
+                                 where num > 0
+                                 select num;
+            var search4Mult1 = from num in massive
+                              where num != 0
+                              select num;
+            var searchChetn1 = from num in massive
+                              where Math.Abs(num) % 2 == 0
+                              select num;
+            foreach (int num in searchPositive1)
+                sum += num;
+            foreach (int num in search4Mult1)
+                mult *= num;
+            Console.WriteLine(sum);
+            Console.WriteLine(mult);
+            Console.WriteLine(searchChetn1.Count());
+        }
+    }
+}
